@@ -227,8 +227,6 @@ zle -N down-line-or-beginning-search
 
 autoload edit-command-line; zle -N edit-command-line
 
-source ~/.config/shell/profile
-
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 zle_highlight+=(paste:none)
 
@@ -250,7 +248,6 @@ setopt hist_ignore_space
 # Nobody need flow control anymore. Troublesome feature.
 #stty -ixon
 setopt noflowcontrol
-
 
 cd() {
     if (( $+2 )); then
