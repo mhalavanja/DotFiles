@@ -64,6 +64,8 @@
 #network,
 #pulseaudio,
 #temperature,
+#custom-media,
+#custom-power,
 #tray {
     padding-left: 10px;
     padding-right: 10px;
@@ -96,6 +98,19 @@
 #battery.critical.discharging {
     animation-name: blink-critical;
     animation-duration: 2s;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-power {
+    background-color: rgba(0,119,179,0.6);
+    border-radius: 50px;
+    margin: 5px 5px;
+    padding: 1px 3px;
 }
 
 #clock {

@@ -11,8 +11,9 @@
     "height": 30,
 
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode"
+        "sway/workspaces"
+//        "sway/mode"
+//        "wlr/taskbar"
     ],
     "modules-center": [
         "sway/window"
@@ -20,14 +21,17 @@
     "modules-right": [
         "tray",
         "network",
+//        "custom/chromium",
         "pulseaudio",
+        "backlight",
         "memory",
         "cpu",
         "temperature",
         "sway/language",
         "battery",
         "clock#date",
-        "clock#time"
+        "clock#time",
+        "custom/power"
     ],
 
 
@@ -78,8 +82,8 @@
 
   "sway/language": {
     "format": "  {}",
-    "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
-},
+    "on-click": "~/.config/waybar/scripts/kblayout.sh",
+  },
 
     "memory": {
         "interval": 30,
@@ -98,16 +102,11 @@
         "tooltip-format": "{ifname}: {ipaddr}"
     },
 
-    "sway/mode": {
-        "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-        "tooltip": false
-    },
-
     "sway/window": {
         "format": "{}",
         "max-length": 100,
         "rewrite": {
-          "(.*) - Brave": "🌎 Brave",
+          "(.*) - Brave": " Brave",
         }
     },
 
@@ -116,14 +115,12 @@
         "disable-scroll": true,
         "format": "{icon} {name}",
         "format-icons": {
-            "1:www": "龜", // Icon: firefox-browser
-            "2:mail": "", // Icon: mail
-            "3:editor": "", // Icon: code
-            "4:terminals": "", // Icon: terminal
-            "5:portal": "", // Icon: terminal
+            "1": "",
+            "2": "",
+            "3": "",
             "urgent": "",
             "focused": "",
-            "default": ""
+            "default": "",
         }
     },
 
@@ -135,7 +132,15 @@
           "headphones": "",
           "default": ["", ""]
         },
-        "on-click": "source ~/.config/waybar/mute.sh"
+        "on-click": "~/.config/waybar/scripts/mute.sh"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""],
+        "on-scroll-up" : "~/.config/waybar/scripts/backlightUp.sh",
+        "on-scroll-down" : "~/.config/waybar/scripts/backlightDown.sh",
     },
 
     "temperature": {
@@ -155,6 +160,34 @@
     "tray": {
         "icon-size": 21,
         "spacing": 5
-    }
+    },
+
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 24,
+      "icon-theme": "Numix-Circle",
+      "markup": true,
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-middle": "close",
+      }
+    },
+
+//    "custom/chromium": {
+  //      "format": "{icon} {}",
+    //    "escape": true,
+      //  "return-type": "json",
+//        "max-length": 40,
+  //      "on-click": "playerctl -p chromium play-pause",
+    //    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+//        "on-scroll-up" : "playerctl -p chromium next",
+  //      "on-scroll-down" : "playerctl -p chromium previous",
+   //     "exec": "~/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+  //  },
+ 
+  	"custom/power": {
+		"format": ""
+	//	"on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
+	}
 
 }
