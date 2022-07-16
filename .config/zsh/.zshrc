@@ -5,6 +5,11 @@ export LC_CTYPE=en_US.UTF-8
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CONFIG_HOME=$HOME/.config
+export SDL_VIDEODRIVER=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+export QT_QPA_PLATFORM=wayland
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_DESKTOP=sway
 
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export ZSH="$XDG_DATA_HOME"/oh-my-zsh
@@ -23,6 +28,10 @@ export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
 export PATH=$PATH:$GOPATH/bin
+
+export FILEMANAGER=thunar
+export EDITOR=code
+export BROWSER=brave
 
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
@@ -140,6 +149,7 @@ alias chown="chown -c"
 alias vim="nvim"
 alias open="xdg-open"
 alias cat="bat"
+alias zathura="devour zathura"
 alias mpv="devour mpv"
 if command -v colordiff > /dev/null 2>&1; then
     alias diff="colordiff -Nuar"

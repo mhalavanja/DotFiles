@@ -14,12 +14,15 @@ set $browser brave
 # Your preferred terminal graphicalEditor
 set $graphicalEditor code
 
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null &&  dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu rofi -show run
+set $menu rofi -show drun
 
 default_border pixel
 font pango:Cantarell 28px
@@ -27,7 +30,7 @@ font pango:Cantarell 28px
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/.config/sway/onedark.png fill
 #
 # Example configuration:
 #
@@ -225,7 +228,7 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
-bindsym --locked XF86Search exec bemenu-run
+bindsym --locked XF86Search exec rofi -show drun
 
 exec nm-applet --indicator
 exec --no-startup-id autotiling
@@ -235,5 +238,6 @@ bar {
 }
 
 for_window [app_id="nm-connection-editor"] floating enable
+for_window [app_id="gsimplecal"] floating enable
 
 include /etc/sway/config.d/*

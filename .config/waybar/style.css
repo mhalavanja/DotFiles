@@ -51,7 +51,7 @@
     background: #323232;
     color: white;
     font-family: Cantarell, Noto Sans, sans-serif;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 /* Each module */
@@ -66,9 +66,10 @@
 #temperature,
 #custom-media,
 #custom-power,
+#disk,
 #tray {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 
@@ -168,10 +169,6 @@
     /* No styles */
 }
 
-#custom-spotify {
-    color: rgb(102, 220, 105);
-}
-
 #temperature {
     /* No styles */
 }
@@ -206,4 +203,8 @@
 #workspaces button.urgent {
     border-color: #c9545d;
     color: #c9545d;
+}
+
+#backlight {
+  padding-right: 10px
 }

@@ -1,4 +1,3 @@
-// https://github.com/Alexays/Waybar/wiki/Configuration
 {
     // -------------------------------------------------------------------------
     // Global configuration
@@ -7,31 +6,24 @@
     "layer": "top",
     "position": "top",
 
-    // If height property would be not present, it'd be calculated dynamically
-    "height": 30,
-
     "modules-left": [
         "sway/workspaces"
-//        "sway/mode"
-//        "wlr/taskbar"
     ],
     "modules-center": [
-        "sway/window"
+        "clock#time",
+        "clock#date",
     ],
     "modules-right": [
         "tray",
         "network",
-//        "custom/chromium",
+//        "custom-chromium",
         "pulseaudio",
         "backlight",
-        "memory",
-        "cpu",
-        "temperature",
         "sway/language",
-        "battery",
-        "clock#date",
-        "clock#time",
-        "custom/power"
+        "memory",
+        "disk",
+        "battery"
+//        "custom-power"
     ],
 
 
@@ -40,14 +32,12 @@
     // -------------------------------------------------------------------------
 
     "battery": {
-        "interval": 10,
+        "interval": 30,
         "states": {
-            "warning": 30,
-            "critical": 15
+            "warning": 60,
+            "critical": 45
         },
-        // Connected to AC
         "format": "  {icon}  {capacity}%", // Icon: bolt
-        // Not connected to AC
         "format-discharging": "{icon}  {capacity}%",
         "format-icons": [
             "", // Icon: battery-full
@@ -56,7 +46,7 @@
             "", // Icon: battery-quarter
             ""  // Icon: battery-empty
         ],
-        "tooltip": true
+        "tooltip": false
     },
 
     "clock#time": {
@@ -66,9 +56,11 @@
     },
 
     "clock#date": {
-      "interval": 10,
+      "interval": 120,
       "format": "  {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}"
+      "tooltip-format": "{:%e %B %Y}",
+      "tooltip": false,
+      "on-click": "gsimplecal"
     },
 
     "cpu": {
@@ -80,10 +72,11 @@
         }
     },
 
-  "sway/language": {
-    "format": "  {}",
-    "on-click": "~/.config/waybar/scripts/kblayout.sh",
-  },
+    "sway/language": {
+      "format": "  {}",
+      "on-click": "~/.config/waybar/scripts/kblayout.sh",
+      "tooltip": false
+    },
 
     "memory": {
         "interval": 30,
@@ -102,14 +95,6 @@
         "tooltip-format": "{ifname}: {ipaddr}"
     },
 
-    "sway/window": {
-        "format": "{}",
-        "max-length": 100,
-        "rewrite": {
-          "(.*) - Brave": " Brave",
-        }
-    },
-
     "sway/workspaces": {
         "all-outputs": false,
         "disable-scroll": true,
@@ -118,6 +103,9 @@
             "1": "",
             "2": "",
             "3": "",
+            "4": "",
+		        "5": "",
+            "6": "",
             "urgent": "",
             "focused": "",
             "default": "",
@@ -125,22 +113,22 @@
     },
 
     "pulseaudio": {
-        //"scroll-step": 1,
+        "scroll-step": 1,
         "format": "{icon}  {volume}%",
           "format-muted": "",
           "format-icons": {
           "headphones": "",
           "default": ["", ""]
         },
-        "on-click": "~/.config/waybar/scripts/mute.sh"
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
 
     "backlight": {
         "device": "intel_backlight",
         "format": "{percent}% {icon}",
         "format-icons": ["", ""],
-        "on-scroll-up" : "~/.config/waybar/scripts/backlightUp.sh",
-        "on-scroll-down" : "~/.config/waybar/scripts/backlightDown.sh",
+        "on-scroll-up" : "light -A 1",
+        "on-scroll-down" : "light -U 1",
     },
 
     "temperature": {
@@ -158,8 +146,7 @@
     },
 
     "tray": {
-        "icon-size": 21,
-        "spacing": 5
+        "icon-size": 24
     },
 
     "wlr/taskbar": {
@@ -174,20 +161,27 @@
     },
 
 //    "custom/chromium": {
-  //      "format": "{icon} {}",
-    //    "escape": true,
-      //  "return-type": "json",
-//        "max-length": 40,
-  //      "on-click": "playerctl -p chromium play-pause",
-    //    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
-//        "on-scroll-up" : "playerctl -p chromium next",
-  //      "on-scroll-down" : "playerctl -p chromium previous",
-   //     "exec": "~/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
-  //  },
+//      "format": "{icon} {}",
+//      "escape": true,
+//      "return-type": "json",
+//      "max-length": 40,
+//      "on-click": "playerctl -p chromium play-pause",
+//      "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+//      "on-scroll-up" : "playerctl -p chromium next",
+//      "on-scroll-down" : "playerctl -p chromium previous",
+//      "exec": "~/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+//  },
  
-  	"custom/power": {
-		"format": ""
-	//	"on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
-	}
+// 	"custom/power": {
+//	  "format": ""
+//	  "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
+//	},
+
+  "disk": {
+    "interval": 30,
+    "format": "{percentage_free} {icon}",
+    "format-icons": "🖫"
+    "path": "/"
+  }
 
 }
