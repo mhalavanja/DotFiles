@@ -96,7 +96,7 @@
     },
 
     "sway/workspaces": {
-        "all-outputs": false,
+        "all-outputs": true,
         "disable-scroll": true,
         "format": "{icon} {name}",
         "format-icons": {
@@ -146,7 +146,8 @@
     },
 
     "tray": {
-        "icon-size": 24
+        "icon-size": 24,
+        "tooltip": false
     },
 
     "wlr/taskbar": {
