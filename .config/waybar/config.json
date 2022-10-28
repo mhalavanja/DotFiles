@@ -1,188 +1,159 @@
 {
-    // -------------------------------------------------------------------------
-    // Global configuration
-    // -------------------------------------------------------------------------
-
-    "layer": "top",
-    "position": "top",
-
-    "modules-left": [
-        "sway/workspaces"
+  // -------------------------------------------------------------------------
+  // Global configuration
+  // -------------------------------------------------------------------------
+  "layer": "top",
+  "position": "top",
+  "modules-left": [
+    "sway/workspaces"
+  ],
+  "modules-center": [
+    "clock#time",
+    "clock#date",
+  ],
+  "modules-right": [
+    "tray",
+    "network",
+    "custom-chromium",
+    "pulseaudio",
+    "backlight",
+    "sway/language",
+    "memory",
+    "disk",
+    "battery"
+  ],
+  // -------------------------------------------------------------------------
+  // Modules
+  // -------------------------------------------------------------------------
+  "battery": {
+    "interval": 30,
+    "states": {
+      "warning": 30,
+      "critical": 20
+    },
+    "format": "  {icon}  {capacity}% {time}", // Icon: bolt
+    "format-discharging": "{icon}  {capacity}% {time}",
+    "format-icons": [
+      "", // Icon: battery-full
+      "", // Icon: battery-three-quarters
+      "", // Icon: battery-half
+      "", // Icon: battery-quarter
+      "" // Icon: battery-empty
     ],
-    "modules-center": [
-        "clock#time",
-        "clock#date",
+    "tooltip": false
+  },
+  "clock#time": {
+    "interval": 1,
+    "format": "{:%H:%M:%S}",
+    "tooltip": false
+  },
+  "clock#date": {
+    "interval": 120,
+    "format": "  {:%e %b %Y}", // Icon: calendar-alt
+    "tooltip-format": "{:%e %B %Y}",
+    "tooltip": false,
+    "on-click": "gsimplecal"
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "  {usage}% ({load})", // Icon: microchip
+    "states": {
+      "warning": 70,
+      "critical": 90
+    }
+  },
+  "sway/language": {
+    "format": "  {}",
+    "on-click": "~/.config/waybar/scripts/kblayout.sh",
+    "tooltip": false
+  },
+  "memory": {
+    "interval": 30,
+    "format": "{used:0.1f}G / {total:0.1f}G ",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
+    "tooltip": false,
+  },
+  "network": {
+    "interval": 30,
+    "format-wifi": " {essid} ({signalStrength}%)",
+    "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+    "format-disconnected": "⚠  Disconnected",
+    "tooltip-format": "{ifname}: {ipaddr}"
+  },
+  "sway/workspaces": {
+    "all-outputs": false,
+    "disable-scroll": true,
+    "format": "{icon} {name}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "urgent": "",
+      "focused": "",
+      "default": "",
+    }
+  },
+  "pulseaudio": {
+    "scroll-step": 1,
+    "format": "{icon}  {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "headphones": "",
+      "default": [
+        "",
+        ""
+      ]
+    },
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "format-icons": [
+      "",
+      ""
     ],
-    "modules-right": [
-        "tray",
-        "network",
-//        "custom-chromium",
-        "pulseaudio",
-        "backlight",
-        "sway/language",
-        "memory",
-        "disk",
-        "battery"
-//        "custom-power"
+    "on-scroll-up": "light -A 1",
+    "on-scroll-down": "bash ~/.config/waybar/scripts/backlightDown.sh",
+    "on-click": "light -S 1",
+    "on-click-right": "light -S 100"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "interval": 5,
+    "format": "{icon}  {temperatureC}°C",
+    "format-icons": [
+      "", // Icon: temperature-empty
+      "", // Icon: temperature-quarter
+      "", // Icon: temperature-half
+      "", // Icon: temperature-three-quarters
+      "" // Icon: temperature-full
     ],
-
-
-    // -------------------------------------------------------------------------
-    // Modules
-    // -------------------------------------------------------------------------
-
-    "battery": {
-        "interval": 30,
-        "states": {
-            "warning": 60,
-            "critical": 45
-        },
-        "format": "  {icon}  {capacity}%", // Icon: bolt
-        "format-discharging": "{icon}  {capacity}%",
-        "format-icons": [
-            "", // Icon: battery-full
-            "", // Icon: battery-three-quarters
-            "", // Icon: battery-half
-            "", // Icon: battery-quarter
-            ""  // Icon: battery-empty
-        ],
-        "tooltip": false
-    },
-
-    "clock#time": {
-        "interval": 1,
-        "format": "{:%H:%M:%S}",
-        "tooltip": false
-    },
-
-    "clock#date": {
-      "interval": 120,
-      "format": "  {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}",
-      "tooltip": false,
-      "on-click": "gsimplecal"
-    },
-
-    "cpu": {
-        "interval": 5,
-        "format": "  {usage}% ({load})", // Icon: microchip
-        "states": {
-          "warning": 70,
-          "critical": 90
-        }
-    },
-
-    "sway/language": {
-      "format": "  {}",
-      "on-click": "~/.config/waybar/scripts/kblayout.sh",
-      "tooltip": false
-    },
-
-    "memory": {
-        "interval": 30,
-        "format": "{used:0.1f}G / {total:0.1f}G ",
-        "states": {
-            "warning": 70,
-            "critical": 90
-        }
-    },
-
-    "network": {
-        "interval": 30,
-        "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
-        "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}"
-    },
-
-    "sway/workspaces": {
-        "all-outputs": true,
-        "disable-scroll": true,
-        "format": "{icon} {name}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-		        "5": "",
-            "6": "",
-            "urgent": "",
-            "focused": "",
-            "default": "",
-        }
-    },
-
-    "pulseaudio": {
-        "scroll-step": 1,
-        "format": "{icon}  {volume}%",
-          "format-muted": "",
-          "format-icons": {
-          "headphones": "",
-          "default": ["", ""]
-        },
-        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-    },
-
-    "backlight": {
-        "device": "intel_backlight",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""],
-        "on-scroll-up" : "light -A 1",
-        "on-scroll-down" : "light -U 1",
-    },
-
-    "temperature": {
-      "critical-threshold": 80,
-      "interval": 5,
-      "format": "{icon}  {temperatureC}°C",
-      "format-icons": [
-          "", // Icon: temperature-empty
-          "", // Icon: temperature-quarter
-          "", // Icon: temperature-half
-          "", // Icon: temperature-three-quarters
-          ""  // Icon: temperature-full
-      ],
-      "tooltip": true
-    },
-
-    "tray": {
-        "icon-size": 24,
-        "tooltip": false
-    },
-
-    "wlr/taskbar": {
-      "format": "{icon}",
-      "icon-size": 24,
-      "icon-theme": "Numix-Circle",
-      "markup": true,
-      "tooltip-format": "{title}",
-      "on-click": "activate",
-      "on-click-middle": "close",
-      }
-    },
-
-//    "custom/chromium": {
-//      "format": "{icon} {}",
-//      "escape": true,
-//      "return-type": "json",
-//      "max-length": 40,
-//      "on-click": "playerctl -p chromium play-pause",
-//      "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
-//      "on-scroll-up" : "playerctl -p chromium next",
-//      "on-scroll-down" : "playerctl -p chromium previous",
-//      "exec": "~/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
-//  },
- 
-// 	"custom/power": {
-//	  "format": ""
-//	  "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
-//	},
-
+    "tooltip": true
+  },
+  "tray": {
+    "icon-size": 24,
+    "tooltip": false
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 24,
+    "icon-theme": "Numix-Circle",
+    "markup": true,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+  },
   "disk": {
     "interval": 30,
-    "format": "{percentage_free} {icon}",
-    "format-icons": "🖫"
+    "format": "aaa {percentage_free} {icon}",
+    "format-icons": "🖫",
     "path": "/"
   }
-
 }
