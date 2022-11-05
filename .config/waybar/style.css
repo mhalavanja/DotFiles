@@ -23,6 +23,8 @@
     min-height: 0;
     margin: 0;
     padding: 0;
+    background: inherit;
+    border-color: #323232;
 }
 
 /* The whole bar */
@@ -34,7 +36,7 @@
 }
 
 /* Each module */
-#battery,
+#upower,
 #clock,
 #cpu,
 #memory,
@@ -45,6 +47,7 @@
 #custom-media,
 #custom-power,
 #disk,
+#mpd,
 #tray {
     padding-left: 10px;
     padding-right: 10px;
@@ -55,21 +58,26 @@
  * Module styles
  * -------------------------------------------------------------------------- */
 
-#battery {
+#mpd {
+    color: white;
+}
+
+#upower {
+    color: white;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
 
-#battery.warning {
+#upower.warning {
     color: orange;
 }
 
-#battery.critical {
+#upower.critical {
     color: red;
 }
 
-#battery.charging {
+#upower.charging {
   color: limegreen;
 }
 
@@ -87,6 +95,7 @@
 }
 
 #clock {
+    color: white;
     font-weight: bold;
 }
 
@@ -103,11 +112,15 @@
 }
 
 #disk {
+  color: white;
+  padding-top: 0px;
   padding-right: 0px;
   padding-left: 0px;
+  padding-bottom: 0px;
 }
 
 #memory {
+    color: white;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
@@ -131,7 +144,7 @@
 }
 
 #network {
-    /* No styles */
+    color: white;
 }
 
 #network.disconnected {
@@ -139,7 +152,7 @@
 }
 
 #pulseaudio {
-    /* No styles */
+  color: white;
 }
 
 #pulseaudio.muted {
@@ -168,20 +181,31 @@
     padding-bottom: 2px;
     padding-left: 10px;
     padding-right: 10px;
-    color: #888888;
+    color: white;
 }
 
 #workspaces button.focused {
-    border-color: #4c7899;
-    color: white;
-    background-color: #285577;
+    border-color: black;
+    color: black;
+    background-color: white;
+}
+
+#workspaces button:hover {
+    border-color: black;
+    color: black;
+    background-color: white;
 }
 
 #workspaces button.urgent {
-    border-color: #c9545d;
-    color: #c9545d;
+    border-color: black;
+    color: red;
 }
 
 #backlight {
+  color: white;
   padding-right: 10px
+}
+
+#language {
+  color: white;
 }
